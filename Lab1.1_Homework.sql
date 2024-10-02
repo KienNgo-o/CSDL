@@ -146,7 +146,7 @@ select TenCongTy,SoNhanVien from CongTy
 
 
 -- 54. Liệt kê tên các dự án đang trong trạng thái 'Đang thực hiện'.
-select * from DuAn
+select TenDuAn from DuAn
 where TrangThai=N'Đang thực hiện ';
 
 
@@ -166,7 +166,7 @@ where SoNhanVien>150;
 
 -- 58. Liệt kê tên các dự án bắt đầu trong năm 2023.
 select TenDuAn from DuAn
-where YEAR (NgayBatDau)='2023';
+where year (NgayBatDau)='2023';
 
 
 -- 59. Hiển thị tên kỹ năng thuộc loại 'Công cụ'.
@@ -185,13 +185,13 @@ where LinhVuc=N'Phát triển phần mềm';
 
 -- 62. Liệt kê tên các dự án có ngày kết thúc trong năm 2023.
 select TenDuAn from DuAn
-where YEAR (NgayKetThuc)='2023';
+where year (NgayKetThuc)='2023';
 
 
 -- 63. Hiển thị tên và cấp độ của các kỹ năng trong bảng ChuyenGia_KyNang.
-SELECT k.TenKyNang, ckn.CapDo
-FROM ChuyenGia_KyNang ckn
-INNER JOIN KyNang k ON ckn.MaKyNang = k.MaKyNang;
+select TenKyNang, CapDo
+from ChuyenGia_KyNang, KyNang
+where ChuyenGia_KyNang.MaKyNang=KyNang.MaKyNang
 
 -- 64. Liệt kê mã chuyên gia và vai trò trong các dự án từ bảng ChuyenGia_DuAn.
 select MaChuyenGia, VaiTro from ChuyenGia_DuAn
@@ -220,7 +220,7 @@ select top 5 HoTen, Email from ChuyenGia
 
 -- 70. Liệt kê tên công ty có chứa từ 'Tech' trong tên.
 select TenCongTy from CongTy
-where TenCongTy LIKE '%Tech%';
+where TenCongTy like '%Tech%';
 
 -- 71. Hiển thị tên dự án và trạng thái, không bao gồm các dự án đã hoàn thành.
 select TenDuAn, TrangThai from DuAn
@@ -228,12 +228,12 @@ where TrangThai !=N'Hoàn Thành';
 
 -- 72. Liệt kê họ tên và chuyên ngành của các chuyên gia, sắp xếp theo chuyên ngành và họ tên.
 select HoTen, ChuyenNganh from ChuyenGia
-ORDER BY ChuyenNganh ASC, HoTen ASC;
+order by ChuyenNganh asc, HoTen asc;
 
 
 -- 73. Hiển thị tên công ty và lĩnh vực, chỉ bao gồm các công ty có từ 100 đến 200 nhân viên.
 select TenCongTy, LinhVuc from CongTy
-where SoNhanVien between 10 and 200;
+where SoNhanVien between 100 and 200;
 
 
 -- 74. Liệt kê tên kỹ năng và loại kỹ năng, sắp xếp theo loại kỹ năng giảm dần và tên kỹ năng tăng dần.
