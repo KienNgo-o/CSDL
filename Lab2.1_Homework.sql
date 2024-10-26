@@ -199,3 +199,10 @@ GROUP BY CG.HoTen
 HAVING AVG(CGKN.CapDo)>3
 ORDER BY AVG(CGKN.CapDo) DESC;
 
+SELECT MaChuyenGia, HoTen, AVG(CapDo) AS CapDoTrungBinh
+FROM ChuyenGia_KyNang 
+WHERE MaChuyenGia IN (SELECT MaChuyenGia FROM ChuyenGia WHERE ChuyenNganh = N'Phát triển phần mềm')
+GROUP BY MaChuyenGia, HoTen
+HAVING AVG(CapDo) > 3
+ORDER BY CapDoTrungBinh DESC;
+
